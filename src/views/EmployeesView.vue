@@ -1,0 +1,42 @@
+<template>
+    <div class="card"><div class="font-medium text-2xl">Employees</div></div>
+    <div class="card">
+        <Toolbar class="mb-4">
+            <template #start>
+                <AddEmployee @setSelectedEmployeeToNull="selectedEmployee = null" />
+                <EditEmployee :employee="selectedEmployee" :is-disabled="isEditButtonDisabled" />
+            </template>
+            <template #end>
+                <DeleteEmployee :employee="selectedEmployee" :is-disabled="isDeleteButtonDisabled" />
+            </template>
+        </Toolbar>
+        <DataTable v-model:selection="selectedEmployee" :value="employees" selectionMode="single" :metaKeySelection="true" dataKey="id" tableStyle="min-width: 50rem">
+            <Column field="firstName" header="First Name"></Column>
+            <Column field="lastName" header="Last Name"></Column>
+            <Column field="jobPosition" header="Job Position"></Column>
+            <Column field="phone" header="Phone"></Column>
+            <Column field="email" header="Email"></Column>
+        </DataTable>
+    </div>  
+</template>
+
+<script setup>
+import { useEmployeesStore } from '@/stores/employees.js'
+import { ref,computed } from 'vue'
+import AddEmployee from '@/components/employees/AddEmployee.vue';
+import EditEmployee from '@/components/employees/EditEmployee.vue'
+import DeleteEmployee from '@/components/employees/DeleteEmployee.vue'
+
+const employeesStore = useEmployeesStore()
+const employees = employeesStore.employees
+
+const selectedEmployee = ref(null)
+
+const isEditButtonDisabled = computed(() => {
+    return selectedEmployee.value ? false : true
+})
+
+const isDeleteButtonDisabled = computed(() => {
+    return selectedEmployee.value ? false : true
+})
+</script>
