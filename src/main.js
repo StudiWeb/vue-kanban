@@ -17,6 +17,10 @@ import InputText from 'primevue/inputtext';
 import InputMask from 'primevue/inputmask';
 import Card from 'primevue/card';
 import Toast from 'primevue/toast';
+import Dropdown from 'primevue/dropdown';
+import PickList from 'primevue/picklist';
+import Checkbox from 'primevue/checkbox';
+
 
 const app = createApp(App);
 const pinia = createPinia()
@@ -38,5 +42,8 @@ app.component('InputText',InputText)
 app.component('InputMask',InputMask)
 app.component('Card',Card)
 app.component('Toast',Toast)
+app.component('Dropdown',Dropdown)
+app.component('PickList',PickList)
+app.component('Checkbox',Checkbox)
 
 app.mount('#app');

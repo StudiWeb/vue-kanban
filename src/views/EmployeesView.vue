@@ -16,6 +16,18 @@
             <Column field="jobPosition" header="Job Position"></Column>
             <Column field="phone" header="Phone"></Column>
             <Column field="email" header="Email"></Column>
+            <Column header="Project manager">
+                <template #body="slotProps">
+                    <i v-if="employeesStore.isProjectManager(slotProps.data)" class="pi pi-check"></i>
+                    <i v-else class="pi pi-times"></i>
+                </template>
+            </Column>
+            <Column header="Team leader">
+                <template #body="slotProps">
+                    <i v-if="employeesStore.isTeamLeader(slotProps.data)" class="pi pi-check"></i>
+                    <i v-else class="pi pi-times"></i>
+                </template>
+            </Column>
         </DataTable>
     </div>  
 </template>
@@ -33,10 +45,10 @@ const employees = employeesStore.employees
 const selectedEmployee = ref(null)
 
 const isEditButtonDisabled = computed(() => {
-    return selectedEmployee.value ? false : true
+    return !selectedEmployee.value
 })
 
 const isDeleteButtonDisabled = computed(() => {
-    return selectedEmployee.value ? false : true
+    return !selectedEmployee.value
 })
 </script>

@@ -2,7 +2,8 @@
 <Button @click="toggleDialog" label="Edit" icon="pi pi-pencil" severity="warning" :disabled="isDisabled" />
 
 <Dialog v-model:visible="isDialogVisible" :style="{width: '450px'}" header="Edit employee" :modal="true">
-    <div class="py-2 flex flex-column gap-4">
+    <div class="flex flex-column gap-4">
+        <div class="py-2 flex flex-column gap-4">
         <div class="flex flex-column gap-2">
             <label for="firstName">First Name</label>
             <InputText id="firstName" v-model="firstName" v-bind="firstNameAttrs" :invalid="errors.firstName" />
@@ -28,6 +29,21 @@
             <InputText id="email" v-model="email" v-bind="emailAttrs" :invalid="errors.email" />
             <small v-if="errors.email" class="text-red-500">{{errors.email}}</small>
         </div>
+    </div>
+    <div class="card flex flex-column gap-3">
+        <div class="text-lg font-medium">Roles</div>
+        <div class="flex flex-column gap-4">
+            <div class="flex align-items-center">
+                <Checkbox v-model="roles" v-bind="rolesAttrs" inputId="projectManager" name="role" value="projectManager" />
+                <label for="projectManager" class="ml-2"> Project manager </label>
+            </div>
+            <div class="flex align-items-center">
+                <Checkbox v-model="roles"  v-bind="rolesAttrs" inputId="teamLeader" name="role" value="teamLeader" />
+                <label for="teamLeader" class="ml-2"> Team leader </label>
+            </div>
+        </div>
+        <small>*employees may have additional roles</small>
+    </div>
     </div>
     <template #footer>
         <Button @click="toggleDialog" label="Cancel" text/>
@@ -70,6 +86,7 @@ const { errors, handleSubmit, defineField, setFieldValue  } = useForm({
         jobPosition: '',
         phone: '',
         email: '',
+        roles: []
     },
     validationSchema: yup.object({
         firstName: yup.string().required().label('First name'),
@@ -77,6 +94,7 @@ const { errors, handleSubmit, defineField, setFieldValue  } = useForm({
         jobPosition: yup.string().required().label('Job position'),
         phone: yup.string().matches(/^\([2-9][0-9]{2}\) ?[2-9][0-9]{2}-[0-9]{4}\b/, 'Phone is not valid').required().label('Phone'),
         email: yup.string().email().required().label('Email'),
+        roles: yup.array().label('Roles')
     }),
 });
 
@@ -96,12 +114,17 @@ const [email, emailAttrs] = defineField('email',{
     validateOnModelUpdate: false,
 });
 
+const [roles, rolesAttrs] = defineField('roles',{
+    validateOnModelUpdate: false,
+});
+
 const initFromValues= () => {
     setFieldValue('firstName',props.employee.firstName)
     setFieldValue('lastName',props.employee.lastName)
     setFieldValue('jobPosition',props.employee.jobPosition)
     setFieldValue('phone',props.employee.phone)
     setFieldValue('email',props.employee.email)
+    setFieldValue('roles',props.employee.roles)
 }
 
 const toggleDialog = () => {
