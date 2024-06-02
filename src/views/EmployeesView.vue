@@ -11,6 +11,11 @@
             </template>
         </Toolbar>
         <DataTable v-model:selection="selectedEmployee" :value="employees" selectionMode="single" :metaKeySelection="true" dataKey="id" tableStyle="min-width: 50rem">
+            <Column header="#" headerStyle="width:3rem">
+                <template #body="slotProps">
+                    {{ slotProps.index + 1 }}
+                </template>
+            </Column>
             <Column field="firstName" header="First Name"></Column>
             <Column field="lastName" header="Last Name"></Column>
             <Column field="jobPosition" header="Job Position"></Column>

@@ -118,7 +118,7 @@ const [roles, rolesAttrs] = defineField('roles',{
     validateOnModelUpdate: false,
 });
 
-const initFromValues= () => {
+const initFormValues= () => {
     setFieldValue('firstName',props.employee.firstName)
     setFieldValue('lastName',props.employee.lastName)
     setFieldValue('jobPosition',props.employee.jobPosition)
@@ -128,7 +128,7 @@ const initFromValues= () => {
 }
 
 const toggleDialog = () => {
-    initFromValues()
+    initFormValues()
     isDialogVisible.value = !isDialogVisible.value
 }
 

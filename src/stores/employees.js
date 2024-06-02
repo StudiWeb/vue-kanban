@@ -10,34 +10,50 @@ export const useEmployeesStore = defineStore('employees', () => {
     const employees = ref([
         {
             id: "e1",
-            createdAt: "",
-            firstName: "Michał",
-            lastName: "Stodolny",
+            firstName: "Todd",
+            lastName: "Ross",
             jobPosition: "Frontend Developer",
-            phone: "(432) 333-1234",
-            email: "michal@stodolny.com",
+            phone: "(851) 794-4722",
+            email: "todd.ross@example.com",
             roles: [PROJECT_MANAGER_ROLE,TEAM_LEADER_ROLE]
         },
         {
             id: "e2",
-            createdAt: "",
-            firstName: "Łukasz",
-            lastName: "Nowakowski",
+            firstName: "Glen",
+            lastName: "Carter",
             jobPosition: "Backend Developer",
-            phone: "(343) 343-1234",
-            email: "lukasz@nowakowski.com",
+            phone: "(593) 337-8976",
+            email: "glen.carter@example.com",
             roles: [TEAM_LEADER_ROLE]
-        }
+        },
+        {
+            id: "e3",
+            firstName: "Bradley",
+            lastName: "Ramirez",
+            jobPosition: "Fullstack Developer",
+            phone: "(895) 726-5639",
+            email: "bradley.ramirez@example.com",
+            roles: []
+        },
+        {
+            id: "e4",
+            firstName: "Laurie",
+            lastName: "Kelly",
+            jobPosition: "UI/UX Designer",
+            phone: "(895) 726-5639",
+            email: "laurie.kelly@example.com",
+            roles: []
+        },
     ])
     
     const pending = ref(false)
 
-    const projectManagersList = computed(() => {
-        return employees.value.find((e) => e.roles.includes(PROJECT_MANAGER_ROLE))
+    const projectManagers = computed(() => {
+        return employees.value.filter((e) => e.roles.includes(PROJECT_MANAGER_ROLE))
     })
 
-    const teamLeadersList = computed(() => {
-        return employees.value.find((e) => e.roles.includes(TEAM_LEADER_ROLE))
+    const teamLeaders = computed(() => {
+        return employees.value.filter((e) => e.roles.includes(TEAM_LEADER_ROLE))
     })
 
     function isProjectManager (employee) {
@@ -49,7 +65,6 @@ export const useEmployeesStore = defineStore('employees', () => {
     }
 
     function addEmployee(employee) {
-        console.log(employee)
         pending.value = true
         return new Promise((resolve,reject) => {
             setTimeout(() => {
@@ -104,5 +119,5 @@ export const useEmployeesStore = defineStore('employees', () => {
         })
     }
 
-    return { employees,pending,projectManagersList, teamLeadersList,isProjectManager,isTeamLeader, addEmployee, editEmployee, deleteEmployee }
+    return { employees,pending,projectManagers, teamLeaders,isProjectManager,isTeamLeader, addEmployee, editEmployee, deleteEmployee }
 })
