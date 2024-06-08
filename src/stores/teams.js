@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref,computed } from 'vue'
 import { v4 as uuidv4 } from 'uuid';
+import EditTeam from '../components/teams/EditTeam.vue';
 
 const PROJECT_MANAGER_ROLE = 'projectManager'
 const TEAM_LEADER_ROLE = 'teamLeader'
@@ -65,22 +66,22 @@ export const useTeamsStore = defineStore('teams', () => {
         })
     }
 
-    // function editEmployee(employee) {
-    //     pending.value = true
-    //     return new Promise((resolve,reject) => {
-    //         setTimeout(() => {
-    //             try {
-    //                 const employeeIndexToEdit = employees.value.findIndex((e) => e.id === employee.id)
-    //                 employees.value[employeeIndexToEdit] = employee
-    //                 resolve(`${employee.firstName} ${employee.lastName} has been edited successfully.`)
-    //             } catch(error) {
-    //                 reject('During editing an employee an error occurred.')
-    //             } finally {
-    //                 pending.value = false
-    //             }
-    //         },PENDING_TIME)
-    //     })
-    // }
+    function editTeam(team) {
+        pending.value = true
+        return new Promise((resolve,reject) => {
+            setTimeout(() => {
+                try {
+                    const teamIndexToEdit = teams.value.findIndex((t) => t.id === team.id)
+                    teams.value[teamIndexToEdit] = team
+                    resolve(`Team ${team.name} has been edited successfully.`)
+                } catch(error) {
+                    reject('During editing the team an error occurred.')
+                } finally {
+                    pending.value = false
+                }
+            },PENDING_TIME)
+        })
+    }
 
     function deleteTeam(teamId) {
         pending.value = true
@@ -101,5 +102,5 @@ export const useTeamsStore = defineStore('teams', () => {
         })
     }
 
-    return { teams ,pending, addTeam, deleteTeam }
+    return { teams ,pending, addTeam,editTeam ,deleteTeam }
 })

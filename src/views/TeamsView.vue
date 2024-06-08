@@ -4,7 +4,7 @@
         <Toolbar class="mb-4">
             <template #start>
                 <AddTeam />
-                <EditTeam :team="selectedTeam" :is-disabled="isButtonDisabled" />
+                <EditTeam :team="selectedTeam" :is-disabled="isButtonDisabled" @set-selected-team-to-null="setSelectedTeamToNull" />
             </template>
             <template #end>
                 <DeleteTeam :team="selectedTeam" :is-disabled="isButtonDisabled" />
@@ -53,4 +53,8 @@ const isButtonDisabled = computed(() => {
 onMounted(() => {
     teams.value = teamStore.teams
 })
+
+const setSelectedTeamToNull = () => {
+    selectedTeam.value = null
+}
 </script>

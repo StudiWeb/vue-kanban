@@ -1,8 +1,7 @@
 <template>
     <Button @click="toggleDialog" :disabled="isDisabled" label="Edit" icon="pi pi-pencil" severity="warning" class="mr-2" />
-    <Dialog v-model:visible="isDialogVisible" :style="{width: '900px'}" header="edit team" :modal="true">
+    <Dialog v-model:visible="isDialogVisible" :style="{width: '900px'}" header="Edit team" :modal="true">
         <div class="py-2 flex flex-column gap-4">
-            {{ adding }}
             <div class="flex flex-column gap-2">
                 <label for="name">Team name</label>
                 <InputText id="name" v-model="name" v-bind="nameAttrs" />
@@ -70,12 +69,10 @@ const props = defineProps({
     }
 })
 
+const emit = defineEmits(['setSelectedTeamToNull'])
+
 const employeesStore = useEmployeesStore()
 const teamStore = useTeamsStore()
-
-const projectManagers = computed(() => {
-    return employeesStore.projectManagers
-})
 
 const teamLeaders = computed(() => {
     return employeesStore.teamLeaders
@@ -84,34 +81,33 @@ const teamLeaders = computed(() => {
 const { errors, defineField ,setFieldValue, handleSubmit} = useForm({
     initialValues: {
         name: '',
-        projectManager: null,
         teamLeader: null,
         employees: [employeesStore.employees,[]]
     },
     validationSchema: {
         name: yup.string().required().label('Team name'),
-        projectManager: yup.object().required().label('Project manager'),
         teamLeader: yup.object().required().label('Team leader'),
         employees: value => (value[1].length > 1 ? true : 'Team has to have at least two members')
     }
-});
+})
 
 const [name, nameAttrs] = defineField('name', {
     validateOnModelUpdate: false
-});
+})
 
 const [teamLeader, teamLeaderAttrs] = defineField('teamLeader',{
     validateOnModelUpdate: false
-});
+})
 
 const [employees, employeesAttrs] = defineField('employees',{
     validateOnModelUpdate: false
-});
+})
 
 const initFormValues= () => {
     setFieldValue('name',props.team.name)
     setFieldValue('teamLeader',props.team.teamLeader)
-    setFieldValue('employees',[employeesStore.employees,props.team.teamMembers])
+    const difference = employeesStore.employees.filter(({ id: id1 }) => !props.team.teamMembers.some(({ id: id2 }) => id2 === id1));
+    setFieldValue('employees',[difference,props.team.teamMembers])
 }
 
 watch(teamLeader,(value) => {
@@ -147,16 +143,18 @@ const editing = computed(() => {
 
 const editTeam = handleSubmit(values => {
     teamStore.editTeam({
+        id: props.team.id,
         name: values.name,
         teamLeader: values.teamLeader,
         teamMembers: values.employees[1]
     })
     .then(data => {
-        toast.add({ severity: 'success', summary: 'Adding new team', detail: data, life: 3000 });
+        toast.add({ severity: 'success', summary: 'Editing team', detail: data, life: 3000 });
     }).catch(error => {
-        toast.add({ severity: 'error', summary: 'Adding new team', detail: error, life: 3000 });
+        toast.add({ severity: 'error', summary: 'Editing team', detail: error, life: 3000 });
     }).finally(() => {
-        closeDialog()
+        emit('setSelectedTeamToNull')
+        toggleDialog()
     })
 })
 </script>
