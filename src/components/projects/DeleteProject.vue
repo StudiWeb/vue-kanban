@@ -2,14 +2,20 @@
     <Button @click="openDialog" label="Delete" icon="pi pi-trash" severity="danger" :disabled="isDisabled" />
     <Dialog v-model:visible="isDialogVisible" header="Delete team" :modal="true">
         <Card style="overflow: hidden" class="my-2">
-            <template #title>{{ team.name }}</template>
+            <template #title>{{ project.name }}</template>
             <template #content>
                 <div class="flex flex-column gap-4">
-                    <div class="flex flex-column gap-1 surface-100 border-round p-2">
-                        <span class="font-medium">Team Leader</span>
-                        <span>{{ team.teamLeader.firstName }} {{ team.teamLeader.lastName }}</span>
+                    <div>
+                        <div class="flex flex-column gap-1 surface-100 p-2">
+                        <span class="font-medium">Project Manager</span>
+                        <span>{{ project.projectManager.firstName }} {{ project.projectManager.lastName }}</span>
                     </div>
-                    <DataTable :value="team.teamMembers" dataKey="id" tableStyle="min-width: 50rem">
+                    <div class="flex flex-column gap-1 surface-50 p-2">
+                        <span class="font-medium">Team Leader</span>
+                        <span>{{ project.team.teamLeader.firstName }} {{ project.team.teamLeader.lastName }}</span>
+                    </div>
+                    </div>
+                    <DataTable :value="project.team.teamMembers" dataKey="id" tableStyle="min-width: 50rem">
                         <template #header>
                             <div class="flex flex-wrap align-items-center justify-content-between gap-2">
                                 <span class="text-lg text-900 font-bold">Team members</span>
@@ -29,18 +35,18 @@
         </Card>
         <template #footer>
             <Button @click="closeDialog" label="Cancel" text />
-            <Button label="Delete" @click="deleteTeam" :loading="deleting" />
+            <Button label="Delete" @click="deleteProject" :loading="deleting" />
         </template>
     </Dialog> 
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useToast } from "primevue/usetoast";
-import { useTeamsStore } from '../../stores/teams';
+import { useToast } from "primevue/usetoast"
+import { useProjectsStore } from '@/stores/projects'
 
 const props = defineProps({
-    team: {
+    project: {
         type: Object,
         required: true
     },
@@ -50,36 +56,35 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['setSelectedTeamToNull'])
+const emit = defineEmits(['setSelectedProjectToNull'])
 
-const teamStore = useTeamsStore()
+const projectStore = useProjectsStore()
 
 const deleting = computed(() => {
-    return teamStore.pending
+    return projectStore.pending
 }) 
 
-const isDialogVisible = ref(false)
-
-const openDialog = () => {
-    isDialogVisible.value = true
-}
-
-const closeDialog = () => {
-    emit('setSelectedTeamToNull')
-    isDialogVisible.value = false
-}
 
 const toast = useToast();
 
-const deleteTeam = () => {
-    teamStore.deleteTeam(props.team.id)
+const deleteProject = () => {
+    projectStore.deleteProject(props.project.id)
     .then(data => {
-        toast.add({ severity: 'success', summary: 'Deleting the team', detail: data, life: 3000 });
+        toast.add({ severity: 'success', summary: 'Deleting the project', detail: data, life: 3000 });
     }).catch(error => {
-        toast.add({ severity: 'error', summary: 'Deleting the team', detail: error, life: 3000 });
+        toast.add({ severity: 'error', summary: 'Deleting the project', detail: error, life: 3000 });
     }).finally(() => {
         closeDialog()
+        emit('setSelectedProjectToNull')
     })
+}
+
+const isDialogVisible = ref(false)
+const openDialog = () => {
+    isDialogVisible.value = true
+}
+const closeDialog = () => {
+    isDialogVisible.value = false
 }
 
 </script>

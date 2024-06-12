@@ -40,6 +40,8 @@ const props = defineProps({
     }
 })
 
+const emit = defineEmits('setSelectedEmployeeToNull')
+
 const employeesStore = useEmployeesStore()
 
 const deleting = computed(() => {
@@ -65,6 +67,7 @@ const deleteEmployee = () => {
     }).catch(error => {
         toast.add({ severity: 'error', summary: 'Deleting an employee', detail: error, life: 3000 });
     }).finally(() => {
+        emit('setSelectedEmployeeToNull')
         closeDialog()
     })
 }

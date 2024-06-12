@@ -3,14 +3,17 @@
     <div class="card">
         <Toolbar class="mb-4">
             <template #start>
-                <AddTeam />
-                <EditTeam :team="selectedTeam" :is-disabled="isButtonDisabled" @set-selected-team-to-null="setSelectedTeamToNull" />
+                <AddTeam @set-selected-team-to-null="setSelectedTeamToNull" />
+                <EditTeam @set-selected-team-to-null="setSelectedTeamToNull" :team="selectedTeam" :is-disabled="isButtonDisabled" />
             </template>
             <template #end>
-                <DeleteTeam :team="selectedTeam" :is-disabled="isButtonDisabled" />
+                <DeleteTeam @set-selected-team-to-null="setSelectedTeamToNull" :team="selectedTeam" :is-disabled="isButtonDisabled" />
             </template>
         </Toolbar>
         <DataTable v-model:selection="selectedTeam" :value="teams" selectionMode="single" :metaKeySelection="true" dataKey="id" tableStyle="min-width: 50rem">
+            <template #empty>
+                <div>No data to display</div>
+            </template>
             <Column header="#" headerStyle="width:3rem">
                 <template #body="slotProps">
                     {{ slotProps.index + 1 }}

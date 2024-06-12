@@ -1,5 +1,5 @@
 <template>
-    <Button @click="toggleDialog" :disabled="isDisabled" label="Edit" icon="pi pi-pencil" severity="warning" class="mr-2" />
+    <Button @click="openDialog" :disabled="isDisabled" label="Edit" icon="pi pi-pencil" severity="warning" class="mr-2" />
     <Dialog v-model:visible="isDialogVisible" :style="{width: '900px'}" header="Edit team" :modal="true">
         <div class="py-2 flex flex-column gap-4">
             <div class="flex flex-column gap-2">
@@ -43,7 +43,7 @@
             </div>
         </div>
         <template #footer>
-            <Button @click="toggleDialog" label="Cancel" text />
+            <Button @click="closeDialog" label="Cancel" text />
             <Button @click="editTeam" label="Edit" :loading="editing" />
         </template>
     </Dialog>
@@ -130,9 +130,14 @@ const moveToSource = (data) => {
 
 const isDialogVisible = ref(false)
 
-const toggleDialog = () => {
+const openDialog = () => {
     initFormValues()
-    isDialogVisible.value = !isDialogVisible.value
+    isDialogVisible.value = true
+}
+
+const closeDialog = () => {
+    emit('setSelectedTeamToNull')
+    isDialogVisible.value = false
 }
 
 const toast = useToast()
@@ -153,8 +158,7 @@ const editTeam = handleSubmit(values => {
     }).catch(error => {
         toast.add({ severity: 'error', summary: 'Editing team', detail: error, life: 3000 });
     }).finally(() => {
-        emit('setSelectedTeamToNull')
-        toggleDialog()
+        closeDialog()
     })
 })
 </script>

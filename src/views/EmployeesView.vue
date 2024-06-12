@@ -3,14 +3,17 @@
     <div class="card">
         <Toolbar class="mb-4">
             <template #start>
-                <AddEmployee @setSelectedEmployeeToNull="selectedEmployee = null" />
-                <EditEmployee :employee="selectedEmployee" :is-disabled="isEditButtonDisabled" />
+                <AddEmployee @setSelectedEmployeeToNull="setSelectedEmployeeToNull" />
+                <EditEmployee @setSelectedEmployeeToNull="setSelectedEmployeeToNull" :employee="selectedEmployee" :is-disabled="isEditButtonDisabled" />
             </template>
             <template #end>
-                <DeleteEmployee :employee="selectedEmployee" :is-disabled="isDeleteButtonDisabled" />
+                <DeleteEmployee @setSelectedEmployeeToNull="setSelectedEmployeeToNull" :employee="selectedEmployee" :is-disabled="isDeleteButtonDisabled" />
             </template>
         </Toolbar>
         <DataTable v-model:selection="selectedEmployee" :value="employees" selectionMode="single" :metaKeySelection="true" dataKey="id" tableStyle="min-width: 50rem">
+            <template #empty>
+                <div>No data to display</div>
+            </template>
             <Column header="#" headerStyle="width:3rem">
                 <template #body="slotProps">
                     {{ slotProps.index + 1 }}
@@ -56,4 +59,8 @@ const isEditButtonDisabled = computed(() => {
 const isDeleteButtonDisabled = computed(() => {
     return !selectedEmployee.value
 })
+
+const setSelectedEmployeeToNull = () => {
+    selectedEmployee.value = null
+}
 </script>

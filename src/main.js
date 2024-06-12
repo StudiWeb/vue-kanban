@@ -20,6 +20,8 @@ import Toast from 'primevue/toast';
 import Dropdown from 'primevue/dropdown';
 import PickList from 'primevue/picklist';
 import Checkbox from 'primevue/checkbox';
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
 
 
 const app = createApp(App);
@@ -45,5 +47,7 @@ app.component('Toast',Toast)
 app.component('Dropdown',Dropdown)
 app.component('PickList',PickList)
 app.component('Checkbox',Checkbox)
+app.component('TabView',TabView)
+app.component('TabPanel',TabPanel)
 
 app.mount('#app');

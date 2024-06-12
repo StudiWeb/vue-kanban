@@ -1,5 +1,5 @@
 <template>
-<Button @click="toggleDialog" label="Edit" icon="pi pi-pencil" severity="warning" :disabled="isDisabled" />
+<Button @click="openDialog" label="Edit" icon="pi pi-pencil" severity="warning" :disabled="isDisabled" />
 
 <Dialog v-model:visible="isDialogVisible" :style="{width: '450px'}" header="Edit employee" :modal="true">
     <div class="flex flex-column gap-4">
@@ -46,7 +46,7 @@
     </div>
     </div>
     <template #footer>
-        <Button @click="toggleDialog" label="Cancel" text/>
+        <Button @click="closeDialog" label="Cancel" text/>
         <Button @click="editEmployee" label="Edit" :loading="editing" />
     </template>
 </Dialog>
@@ -70,6 +70,8 @@ const props = defineProps({
         default: true
     }
 })
+
+const emit = defineEmits(['setSelectedEmployeeToNull'])
 
 const employeesStore = useEmployeesStore()
 
@@ -127,9 +129,14 @@ const initFormValues= () => {
     setFieldValue('roles',props.employee.roles)
 }
 
-const toggleDialog = () => {
+const openDialog = () => {
     initFormValues()
-    isDialogVisible.value = !isDialogVisible.value
+    isDialogVisible.value = true
+}
+
+const closeDialog = () => {
+    emit('setSelectedEmployeeToNull')
+    isDialogVisible.value = false
 }
 
 const toast = useToast();
@@ -143,7 +150,7 @@ const editEmployee = handleSubmit(values => {
     }).catch(error => {
         toast.add({ severity: 'error', summary: 'Editing new employee', detail: error, life: 3000 });
     }).finally(() => {
-        toggleDialog()
+        closeDialog()
     })
 });
 

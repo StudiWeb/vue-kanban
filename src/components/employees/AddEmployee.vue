@@ -115,6 +115,7 @@ const addEmployee = handleSubmit(values => {
   }).catch(error => {
     toast.add({ severity: 'error', summary: 'Adding new employee', detail: error, life: 3000 });
   }).finally(() => {
+    emit('setSelectedEmployeeToNull')
     closeDialog()
   })
 });
@@ -123,7 +124,6 @@ const isDialogVisible = ref(false)
 
 const openDialog = () => {
     isDialogVisible.value = true
-    emit('setSelectedEmployeeToNull')
 }
 
 const closeDialog = () => {

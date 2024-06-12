@@ -1,5 +1,5 @@
 <template>
-    <Button @click="toggleDialog" label="New" icon="pi pi-plus" severity="success" class="mr-2" />
+    <Button @click="openDialog" label="New" icon="pi pi-plus" severity="success" class="mr-2" />
     <Dialog v-model:visible="isDialogVisible" :style="{width: '900px'}" header="Add team" :modal="true">
         <div class="py-2 flex flex-column gap-4">
             <div class="flex flex-column gap-2">
@@ -43,7 +43,7 @@
             </div>
         </div>
         <template #footer>
-            <Button @click="toggleDialog" label="Cancel" text />
+            <Button @click="closeDialog" label="Cancel" text />
             <Button @click="addTeam" label="Add" :loading="adding" />
         </template>
     </Dialog>
@@ -58,12 +58,10 @@ import { useToast } from "primevue/usetoast";
 import * as yup from 'yup';
 import selectSupervisor from './composables/selectSupervisor';
 
+const emit = defineEmits(['setSelectedTeamToNull'])
+
 const employeesStore = useEmployeesStore()
 const teamStore = useTeamsStore()
-
-const projectManagers = computed(() => {
-    return employeesStore.projectManagers
-})
 
 const teamLeaders = computed(() => {
     return employeesStore.teamLeaders
@@ -109,9 +107,12 @@ const moveToSource = (data) => {
 }
 
 const isDialogVisible = ref(false)
-
-const toggleDialog = () => {
-    isDialogVisible.value = !isDialogVisible.value
+const openDialog = () => {
+    isDialogVisible.value = true
+}
+const closeDialog = () => {
+    emit('setSelectedTeamToNull')
+    isDialogVisible.value = false  
 }
 
 const toast = useToast()

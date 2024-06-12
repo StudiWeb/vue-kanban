@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
-import { ref,computed } from 'vue'
+import { ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid';
-import EditTeam from '../components/teams/EditTeam.vue';
 
 const PROJECT_MANAGER_ROLE = 'projectManager'
 const TEAM_LEADER_ROLE = 'teamLeader'
@@ -42,6 +41,58 @@ export const useTeamsStore = defineStore('teams', () => {
                 }
             ]
         },
+        {
+            id: "t2",
+            name: 'The Dream Team',
+            teamLeader: {               
+                id: "e9",
+                firstName: "Christina",
+                lastName: "Beck",
+                jobPosition: "Python Developer",
+                phone: "(352) 869-1115",
+                email: "christina.beck@example.com",
+                roles: [TEAM_LEADER_ROLE]
+            },
+            teamMembers: [
+                {
+                    id: "e9",
+                    firstName: "Christina",
+                    lastName: "Beck",
+                    jobPosition: "Python Developer",
+                    phone: "(352) 869-1115",
+                    email: "christina.beck@example.com",
+                    roles: [TEAM_LEADER_ROLE]
+                },
+                {               
+                    id: "e7",
+                    firstName: "Ron",
+                    lastName: "Snyder",
+                    jobPosition: "Senior C++ Engineer",
+                    phone: "(733) 301-0725",
+                    email: "ron.snyder@example.com",
+                    roles: []
+                },
+                {
+                    id: "e5",
+                    firstName: "Nicole",
+                    lastName: "Hanson",
+                    jobPosition: "DevOps Engineer",
+                    phone: "(726) 667-1891",
+                    email: "nicole.hanson@example.com",
+                    roles: [PROJECT_MANAGER_ROLE]
+                },
+                {
+                    id: "e4",
+                    firstName: "Laurie",
+                    lastName: "Kelly",
+                    jobPosition: "UI/UX Designer",
+                    phone: "(895) 726-5639",
+                    email: "laurie.kelly@example.com",
+                    roles: [PROJECT_MANAGER_ROLE]
+                }
+            ]
+        },
+        
     ])
     
     const pending = ref(false)

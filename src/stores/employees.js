@@ -42,7 +42,61 @@ export const useEmployeesStore = defineStore('employees', () => {
             jobPosition: "UI/UX Designer",
             phone: "(895) 726-5639",
             email: "laurie.kelly@example.com",
+            roles: [PROJECT_MANAGER_ROLE]
+        },
+        {
+            id: "e5",
+            firstName: "Nicole",
+            lastName: "Hanson",
+            jobPosition: "DevOps Engineer",
+            phone: "(726) 667-1891",
+            email: "nicole.hanson@example.com",
+            roles: [PROJECT_MANAGER_ROLE]
+        },
+        {
+            id: "e6",
+            firstName: "Roland",
+            lastName: "Holland",
+            jobPosition: "Flutter Developer",
+            phone: "(236) 405-4677",
+            email: "roland.holland@example.com",
+            roles: [TEAM_LEADER_ROLE]
+        },
+        {
+            id: "e7",
+            firstName: "Ron",
+            lastName: "Snyder",
+            jobPosition: "Senior C++ Engineer",
+            phone: "(733) 301-0725",
+            email: "ron.snyder@example.com",
             roles: []
+        },
+        {
+            id: "e8",
+            firstName: "Pamela",
+            lastName: "Burton",
+            jobPosition: "Mobile Tester",
+            phone: "(514) 947-5044",
+            email: "pamela.burton@example.com",
+            roles: []
+        },
+        {
+            id: "e9",
+            firstName: "Christina",
+            lastName: "Beck",
+            jobPosition: "Python Developer",
+            phone: "(352) 869-1115",
+            email: "christina.beck@example.com",
+            roles: [TEAM_LEADER_ROLE]
+        },
+        {
+            id: "e10",
+            firstName: "Rhonda",
+            lastName: "Kennedy",
+            jobPosition: "Data Engineer",
+            phone: "(402) 207-8156",
+            email: "rhonda.kennedy@example.com",
+            roles: [TEAM_LEADER_ROLE,PROJECT_MANAGER_ROLE]
         },
     ])
     
