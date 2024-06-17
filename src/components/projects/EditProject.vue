@@ -8,8 +8,8 @@
                 <small v-if="errors.name" class="text-red-500">{{errors.name}}</small>
             </div>
             <div class="flex flex-column gap-2">
-                <label for="username">Project manager</label>
-                <Dropdown v-model="projectManager" v-bind="projectManagerAttrs" :options="projectManagers" placeholder="Select project manager" checkmark :highlightOnSelect="false">
+                <label for="projectManager">Project manager</label>
+                <Dropdown v-model="projectManager" v-bind="projectManagerAttrs" id="projectManager" :options="projectManagers" placeholder="Select project manager" checkmark :highlightOnSelect="false">
                     <template #value="slotProps">
                         <div v-if="slotProps.value" class="flex flex-column gap-2">
                             <span class="font-semibold text-sm">{{ slotProps.value.firstName }} {{ slotProps.value.lastName }}</span>
@@ -26,8 +26,8 @@
                 <small v-if="errors.projectManager" class="text-red-500">{{errors.projectManager}}</small>
             </div>
             <div class="flex flex-column gap-2">
-                <label for="username">Team</label>
-                    <Dropdown v-model="team" v-bind="teamAttrs" :options="teams" placeholder="Select team" checkmark :highlightOnSelect="false">
+                <label for="team">Team</label>
+                    <Dropdown v-model="team" v-bind="teamAttrs" id="team" :options="teams" placeholder="Select team" checkmark :highlightOnSelect="false">
                         <template #value="slotProps">
                             <div v-if="slotProps.value" class="flex flex-column gap-2">
                                 <span class="font-semibold text-sm">{{ slotProps.value.name }}</span>
