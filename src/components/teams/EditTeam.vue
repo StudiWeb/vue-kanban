@@ -8,8 +8,8 @@
                 <small v-if="errors.name" class="text-red-500">{{errors.name}}</small>
             </div>
             <div class="flex flex-column gap-2">
-                <label for="username">Team Leader</label>
-                <Dropdown v-model="teamLeader" v-bind="teamLeaderAttrs" :options="teamLeaders" optionLabel="firstName" placeholder="Select a team leader" checkmark :highlightOnSelect="false">
+                <label for="teamLeader">Team Leader</label>
+                <Dropdown v-model="teamLeader" v-bind="teamLeaderAttrs" :options="teamLeaders" id="teamLeader" optionLabel="firstName" placeholder="Select a team leader" checkmark :highlightOnSelect="false">
                     <template #value="slotProps">
                         <div v-if="slotProps.value" class="flex flex-column gap-2">
                             <span class="font-semibold text-sm">{{ slotProps.value.firstName }} {{ slotProps.value.lastName }}</span>
