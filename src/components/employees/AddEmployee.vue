@@ -4,28 +4,28 @@
         <div class="flex flex-column gap-4">
             <div class="flex flex-column gap-4">
                 <div class="flex flex-column gap-2">
-                    <label for="username">First Name</label>
-                    <InputText id="username" v-model="firstName" v-bind="firstNameAttrs" :invalid="errors.firstName" />
+                    <label for="firstName">First Name</label>
+                    <InputText id="firstName" v-model="firstName" v-bind="firstNameAttrs" :invalid="errors.firstName" />
                     <small v-if="errors.firstName" class="text-red-500">{{errors.firstName}}</small>
                 </div>
                 <div class="flex flex-column gap-2">
-                    <label for="username">Last Name</label>
-                    <InputText id="username" v-model="lastName" v-bind="lastNameAttrs" :invalid="errors.lastName" />
+                    <label for="lastName">Last Name</label>
+                    <InputText id="lastName" v-model="lastName" v-bind="lastNameAttrs" :invalid="errors.lastName" />
                     <small v-if="errors.lastName" class="text-red-500">{{errors.lastName}}</small>
                 </div>
                 <div class="flex flex-column gap-2">
-                    <label for="username">Job Position</label>
-                    <InputText id="username" v-model="jobPosition" v-bind="jobPositionAttrs" :invalid="errors.jobPosition" />
+                    <label for="jobPosition">Job Position</label>
+                    <InputText id="jobPosition" v-model="jobPosition" v-bind="jobPositionAttrs" :invalid="errors.jobPosition" />
                     <small v-if="errors.jobPosition" class="text-red-500">{{errors.jobPosition}}</small>
                 </div>
                 <div class="flex flex-column gap-2">
-                    <label for="username">Phone</label>
-                    <InputMask id="basic"  v-model="phone" v-bind="phoneAttrs" :invalid="errors.phone" mask="(999) 999-9999" />
+                    <label for="phone">Phone</label>
+                    <InputMask id="phone"  v-model="phone" v-bind="phoneAttrs" :invalid="errors.phone" mask="(999) 999-9999" />
                     <small v-if="errors.phone" class="text-red-500">{{errors.phone}}</small>
                 </div>
                 <div class="flex flex-column gap-2">
-                    <label for="username">Email</label>
-                    <InputText id="username" v-model="email" v-bind="emailAttrs" :invalid="errors.email" />
+                    <label for="email">Email</label>
+                    <InputText id="email" v-model="email" v-bind="emailAttrs" :invalid="errors.email" />
                     <small v-if="errors.email" class="text-red-500">{{errors.email}}</small>
                 </div>
             </div>
@@ -33,11 +33,11 @@
                 <div class="text-lg font-medium">Roles</div>
                 <div class="flex flex-column gap-4">
                     <div class="flex align-items-center">
-                        <Checkbox v-model="roles" v-bind="rolesAttrs" inputId="projectManager" name="role" value="projectManager" />
+                        <Checkbox v-model="roles" v-bind="rolesAttrs" inputId="projectManager" name="roles" value="projectManager" />
                         <label for="projectManager" class="ml-2"> Project manager </label>
                     </div>
                     <div class="flex align-items-center">
-                        <Checkbox v-model="roles"  v-bind="rolesAttrs" inputId="teamLeader" name="role" value="teamLeader" />
+                        <Checkbox v-model="roles"  v-bind="rolesAttrs" inputId="teamLeader" name="roles" value="teamLeader" />
                         <label for="teamLeader" class="ml-2"> Team leader </label>
                     </div>
                 </div>

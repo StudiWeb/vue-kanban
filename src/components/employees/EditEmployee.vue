@@ -34,11 +34,11 @@
         <div class="text-lg font-medium">Roles</div>
         <div class="flex flex-column gap-4">
             <div class="flex align-items-center">
-                <Checkbox v-model="roles" v-bind="rolesAttrs" inputId="projectManager" name="role" value="projectManager" />
+                <Checkbox v-model="roles" v-bind="rolesAttrs" inputId="projectManager" name="roles" value="projectManager" />
                 <label for="projectManager" class="ml-2"> Project manager </label>
             </div>
             <div class="flex align-items-center">
-                <Checkbox v-model="roles"  v-bind="rolesAttrs" inputId="teamLeader" name="role" value="teamLeader" />
+                <Checkbox v-model="roles"  v-bind="rolesAttrs" inputId="teamLeader" name="roles" value="teamLeader" />
                 <label for="teamLeader" class="ml-2"> Team leader </label>
             </div>
         </div>
