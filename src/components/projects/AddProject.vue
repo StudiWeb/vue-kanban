@@ -25,32 +25,26 @@
                 </Dropdown>
                 <small v-if="errors.projectManager" class="text-red-500">{{errors.projectManager}}</small>
             </div>
-            <TabView>
-                <TabPanel header="Choose team">
-                    <div class="flex flex-column gap-2">
-                        <label for="username">Team</label>
-                        <Dropdown v-model="team" v-bind="teamAttrs" :options="teams" placeholder="Select team" checkmark :highlightOnSelect="false">
-                            <template #value="slotProps">
-                                <div v-if="slotProps.value" class="flex flex-column gap-2">
-                                    <span class="font-semibold text-sm">{{ slotProps.value.name }}</span>
-                                    <span class="text-sm">{{ slotProps.value.teamLeader.firstName }} {{ slotProps.value.teamLeader.lastName }} (Team Leader)</span>
-                                </div>
-                            </template>
-                            <template #option="slotProps">
-                                <div v-if="slotProps.option" class="flex flex-column gap-2">
-                                    <span class="font-semibold text-sm">{{ slotProps.option.name }}</span>
-                                    <span class="text-sm">{{ slotProps.option.teamLeader.firstName }} {{ slotProps.option.teamLeader.lastName }} (Team Leader)</span>
-                                </div>
-                            </template>
-                        </Dropdown>
-                        <small v-if="errors.team" class="text-red-500">{{errors.team}}</small>
-                    </div>
-                </TabPanel>
-                <TabPanel header="Create team">
-                    <CreateTeam />
-                </TabPanel>
-            </TabView>
-        </div>
+            <div class="flex flex-column gap-2">
+                    <label for="username">Team</label>
+                    <Dropdown v-model="team" v-bind="teamAttrs" :options="teams" placeholder="Select team" checkmark :highlightOnSelect="false">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value" class="flex flex-column gap-2">
+                                <span class="font-semibold text-sm">{{ slotProps.value.name }}</span>
+                                <span class="text-sm">{{ slotProps.value.teamLeader.firstName }} {{ slotProps.value.teamLeader.lastName }} (Team Leader)</span>
+                            </div>
+                        </template>
+                        <template #option="slotProps">
+                            <div v-if="slotProps.option" class="flex flex-column gap-2">
+                                <span class="font-semibold text-sm">{{ slotProps.option.name }}</span>
+                                <span class="text-sm">{{ slotProps.option.teamLeader.firstName }} {{ slotProps.option.teamLeader.lastName }} (Team Leader)</span>
+                            </div>
+                        </template>
+                    </Dropdown>
+                    <small v-if="errors.team" class="text-red-500">{{errors.team}}</small>
+                </div>
+                <TeamDetails v-if="team" :team="team" />
+            </div>
         <template #footer>
             <Button @click="closeDialog" label="Cancel" text />
             <Button label="Add" @click="addProject" :loading="adding" />
@@ -66,7 +60,8 @@ import { useForm } from 'vee-validate'
 import { useEmployeesStore } from '@/stores/employees.js'
 import { useTeamsStore } from '@/stores/teams.js'
 import { useProjectsStore } from '@/stores/projects.js'
-import CreateTeam from './CreateTeam.vue'
+import TeamDetails from "@/components/projects/TeamDetails.vue"
+
 
 const emit = defineEmits(['setSelectedProjectToNull'])
 
@@ -107,25 +102,6 @@ const [team, teamAttrs] = defineField('team',{
     validateOnModelUpdate: false,
 });
 
-const toast = useToast();
-
-const adding = computed(() => {
-    return projectsStore.pending
-})
-
-
-const addProject = handleSubmit(values => {
-    projectsStore
-        .addProject({...values})
-        .then(data => {
-            toast.add({ severity: 'success', summary: 'Adding new project', detail: data, life: 3000 });
-        }).catch(error => {
-            toast.add({ severity: 'error', summary: 'Adding new project', detail: error, life: 3000 });
-        }).finally(() => {
-            closeDialog()
-        })
-});
-
 const isDialogVisible = ref(false)
 
 const openDialog = () => {
@@ -134,8 +110,25 @@ const openDialog = () => {
 
 const closeDialog = () => {
     resetForm()
-    emit('setSelectedProjectToNull')
     isDialogVisible.value = false
 }
 
+const toast = useToast();
+
+const adding = computed(() => {
+    return projectsStore.pending
+})
+
+const addProject = handleSubmit(values => {
+    projectsStore.addProject({...values})
+        .then(data => {
+            toast.add({ severity: 'success', summary: 'Adding new project', detail: data, life: 3000 });
+        }).catch(error => {
+            toast.add({ severity: 'error', summary: 'Adding new project', detail: error, life: 3000 });
+        }).finally(() => {
+            newTeam.value = false
+            closeDialog()
+        })
+    
+});
 </script>

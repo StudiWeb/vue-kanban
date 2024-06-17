@@ -98,7 +98,6 @@ export const useTeamsStore = defineStore('teams', () => {
     const pending = ref(false)
 
     function addTeam(team) {
-        console.log(team)
         pending.value = true
         return new Promise((resolve,reject) => {
             setTimeout(() => {

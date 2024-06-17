@@ -4,7 +4,7 @@
         <div class="flex justify-content-between mb-3">
             <div>
                 <span class="block text-500 font-medium mb-3">{{ title }}</span>
-                <div class="text-900 font-medium text-xl">{{ number }}</div>
+                <div class="text-900 font-bold text-4xl">{{ number }}</div>
             </div>
             <div class="flex align-items-center justify-content-center border-round bg-green-100" style="width: 2.5rem; height: 2.5rem">
                 <i v-if="title === 'Employees'" class="pi pi-user text-green-500 text-xl"></i>
