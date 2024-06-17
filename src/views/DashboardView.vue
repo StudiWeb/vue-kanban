@@ -1,4 +1,5 @@
 <template>
+    <div class="card"><div class="font-medium text-2xl">Dashboard</div></div>
     <div class="card">
         <div class="grid">
             <DasboardCard class="col-12 lg:col-6 xl:col-4" title="Employees" :number="numberOfEmployees" />
