@@ -21,7 +21,7 @@
             </Column>
             <Column field="name" header="Name">
                 <template #body="slotProps">
-                    <span></span>
+                    <span class="font-bold">{{ slotProps.data.name }}</span>
                 </template>
             </Column>
             <Column field="description" header="Description" headerStyle="width:36rem"></Column>

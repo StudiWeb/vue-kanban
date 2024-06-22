@@ -23,11 +23,13 @@ import Checkbox from 'primevue/checkbox'
 import TabView from 'primevue/tabview'
 import TabPanel from 'primevue/tabpanel'
 import Menubar from 'primevue/menubar'
-import Accordion from 'primevue/accordion'
-import AccordionTab from 'primevue/accordiontab'
 import ScrollPanel from 'primevue/scrollpanel'
 import Badge from 'primevue/badge'
 import Textarea from 'primevue/textarea'
+import Accordion from 'primevue/accordion';
+import AccordionTab from 'primevue/accordiontab';
+import Tooltip from 'primevue/tooltip';
+
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -36,6 +38,8 @@ app.use(router);
 app.use(PrimeVue, { ripple: true });
 app.use(pinia)
 app.use(ToastService);
+
+app.directive('tooltip', Tooltip);
 
 app.component('VeeForm',Form)
 app.component('VeeField',Field)
@@ -55,10 +59,10 @@ app.component('Checkbox',Checkbox)
 app.component('TabView',TabView)
 app.component('TabPanel',TabPanel)
 app.component('Menubar',Menubar)
-app.component('Accordion',Accordion)
-app.component('AccordionTab',AccordionTab)
 app.component('ScrollPanel',ScrollPanel)
 app.component('Badge',Badge)
 app.component('Textarea',Textarea)
+app.component('Accordion',Accordion)
+app.component('AccordionTab',AccordionTab)
 
 app.mount('#app');

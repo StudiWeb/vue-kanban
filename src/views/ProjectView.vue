@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 h-screen">
+    <div class="p-4 max-h-screen">
         <div class="card" v-if="project">
             <Menubar :model="items">
                 <template #start>
@@ -36,16 +36,13 @@ onMounted(() => {
     project.value = projectStore.getProject(route.params.id)
 })
 
+
+
 const items = ref([
     {
         label: 'Board',
         icon: 'pi pi-home',
         route: 'project.show.board'
-    },
-    {
-        label: 'Progress',
-        icon: 'pi pi-search',
-        route: 'project.show.progress'
     },
     {
         label: 'Tasks',

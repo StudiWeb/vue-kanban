@@ -98,7 +98,7 @@ export const useProjectsStore = defineStore('projects', () => {
                         email: "nicole.hanson@example.com",
                         roles: [PROJECT_MANAGER_ROLE]
                     },
-                    status: TASK_BACKLOG,
+                    status: TASK_DOING,
                 },
                 {
                     id: 'p1t2',
@@ -128,7 +128,7 @@ export const useProjectsStore = defineStore('projects', () => {
                         email: "laurie.kelly@example.com",
                         roles: [PROJECT_MANAGER_ROLE]
                     },
-                    status: TASK_BACKLOG,
+                    status: TASK_DOING,
                 },
                 {
                     id: 'p1t4',
@@ -157,7 +157,7 @@ export const useProjectsStore = defineStore('projects', () => {
                     name: 'API Integration',
                     description: 'Migrate existing urban data and records to the Urban Link platform while ensuring data integrity, accuracy, and compliance with data protection regulations.',
                     employee: null,
-                    status: TASK_BACKLOG,
+                    status: TASK_DONE,
                 },
                 {
                     id: 'p1t7',
@@ -171,7 +171,7 @@ export const useProjectsStore = defineStore('projects', () => {
                     name: 'Performance Testing',
                     description: 'Perform rigorous performance tests to evaluate the responsiveness, scalability, and reliability of Urban Link systems under various conditions and loads.',
                     employee: null,
-                    status: TASK_BACKLOG,
+                    status: TASK_DONE,
                 },
                 {
                     id: 'p1t9',
@@ -193,7 +193,7 @@ export const useProjectsStore = defineStore('projects', () => {
                         email: "nicole.hanson@example.com",
                         roles: [PROJECT_MANAGER_ROLE]
                     },
-                    status: TASK_BACKLOG,
+                    status: TASK_REVIEW,
                 },
             ]
         },
@@ -267,6 +267,11 @@ export const useProjectsStore = defineStore('projects', () => {
         return project.tasks
     }
 
+    function getEmployees(projectId) {
+        const project = projects.value.find(p => p.id === projectId)
+        return project.team.teamMembers
+    }
+
     function addTask(projectId, task) {
         pending.value = true
         return new Promise((resolve, reject) => {
@@ -320,5 +325,55 @@ export const useProjectsStore = defineStore('projects', () => {
         })
     }
 
-    return { projects,pending, addProject,editProject ,deleteProject, getProject, getTasks, addTask, editTask,deleteTask }
+    function editEmployee(projectId,taskId,employee) {
+        pending.value = true
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    const project = projects.value.find(p => p.id === projectId)
+                    const task = project.tasks.find(t => t.id === taskId)
+                    task.employee = employee
+                    resolve(`Employee has been edited successfully.`)
+                } catch(error) {
+                    reject('During editing the employee an error occurred.')
+                } finally {
+                    pending.value = false
+                }
+            },PENDING_TIME)
+        })
+    }
+
+    function editDescription(projectId,taskId,description) {
+        pending.value = true
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    const project = projects.value.find(p => p.id === projectId)
+                    const task = project.tasks.find(t => t.id === taskId)
+                    task.description = description
+                    resolve(`Description has been edited successfully.`)
+                } catch(error) {
+                    reject('During editing the description an error occurred.')
+                } finally {
+                    pending.value = false
+                }
+            },PENDING_TIME)
+        })
+    }
+
+    return { 
+        projects,
+        pending, 
+        addProject,
+        editProject,
+        deleteProject, 
+        getProject, 
+        getTasks,
+        getEmployees,
+        addTask,
+        editTask,
+        deleteTask,
+        editEmployee,
+        editDescription 
+    }
 })
