@@ -47,6 +47,7 @@
             <Button @click="editTeam" label="Edit" :loading="editing" />
         </template>
     </Dialog>
+    <Toast />
 </template>
 
 <script setup>

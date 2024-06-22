@@ -22,6 +22,7 @@
             <Button label="Delete" @click="deleteEmployee" :loading="deleting" />
         </template>
     </Dialog> 
+    <Toast />
 </template>
 
 <script setup>

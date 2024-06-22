@@ -1,0 +1,3 @@
+<template>
+    {{ $route.name }}
+</template>

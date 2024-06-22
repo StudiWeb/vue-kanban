@@ -89,8 +89,17 @@ export const useTeamsStore = defineStore('teams', () => {
                     phone: "(895) 726-5639",
                     email: "laurie.kelly@example.com",
                     roles: [PROJECT_MANAGER_ROLE]
+                },
+                {
+                    id: "e10",
+                    firstName: "Rhonda",
+                    lastName: "Kennedy",
+                    jobPosition: "Data Engineer",
+                    phone: "(402) 207-8156",
+                    email: "rhonda.kennedy@example.com",
+                    roles: [TEAM_LEADER_ROLE,PROJECT_MANAGER_ROLE]
                 }
-            ]
+            ],
         },
         
     ])

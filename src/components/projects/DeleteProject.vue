@@ -38,6 +38,7 @@
             <Button label="Delete" @click="deleteProject" :loading="deleting" />
         </template>
     </Dialog> 
+    <Toast />
 </template>
 
 <script setup>

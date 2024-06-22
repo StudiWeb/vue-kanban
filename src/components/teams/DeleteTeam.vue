@@ -32,6 +32,7 @@
             <Button label="Delete" @click="deleteTeam" :loading="deleting" />
         </template>
     </Dialog> 
+    <Toast />
 </template>
 
 <script setup>

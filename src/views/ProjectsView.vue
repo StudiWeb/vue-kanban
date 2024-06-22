@@ -37,7 +37,7 @@
             </Column>
             <Column>
                 <template #body="slotProps">
-                    <Button label="Manage" rounded />
+                    <Button label="Manage" rounded @click="navigateToProject(slotProps.data.id)" :loading="navigating" />
                 </template>
             </Column>
         </DataTable>
@@ -46,7 +46,8 @@
 
 <script setup>
 import { ref,computed } from 'vue'
-import { useProjectsStore } from '../stores/projects';
+import { useProjectsStore } from '@/stores/projects';
+import { useRouter } from 'vue-router';
 import AddProject from '@/components/projects/AddProject.vue'
 import EditProject from '@/components/projects/EditProject.vue';
 import DeleteProject from '@/components/projects/DeleteProject.vue';
@@ -68,4 +69,13 @@ const setSelectedProjectToNull = () => {
     selectedProject.value = null
 }
 
+const router = useRouter()
+const navigating = ref(false)
+const navigateToProject = (id) => {
+    navigating.value = true
+    setTimeout(() => {
+        router.push({name: 'project.show.board', params: {id: id}})
+        navigating.value = false
+    },1500)
+}
 </script>

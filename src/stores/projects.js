@@ -4,58 +4,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 const PROJECT_MANAGER_ROLE = 'projectManager'
 const TEAM_LEADER_ROLE = 'teamLeader'
+const TASK_BACKLOG = 'backlog'
+const TASK_DOING = 'doing'
+const TASK_REVIEW = 'review'
+const TASK_DONE = 'done'
 const PENDING_TIME = 1500
 
 export const useProjectsStore = defineStore('projects', () => {
     const projects = ref([
         {
             id: 'p1',
-            name: "Market Master",
-            projectManager: {
-                id: "e1",
-                firstName: "Todd",
-                lastName: "Ross",
-                jobPosition: "Frontend Developer",
-                phone: "(851) 794-4722",
-                email: "todd.ross@example.com",
-                roles: [PROJECT_MANAGER_ROLE,TEAM_LEADER_ROLE]
-            },
-            team: {
-                id: "t1",
-                name: 'Rocket Team',
-                teamLeader: {               
-                    id: "e2",
-                    firstName: "Glen",
-                    lastName: "Carter",
-                    jobPosition: "Backend Developer",
-                    phone: "(593) 337-8976",
-                    email: "glen.carter@example.com",
-                    roles: [TEAM_LEADER_ROLE]
-                },
-                teamMembers: [
-                    {
-                        id: "e1",
-                        firstName: "Todd",
-                        lastName: "Ross",
-                        jobPosition: "Frontend Developer",
-                        phone: "(851) 794-4722",
-                        email: "todd.ross@example.com",
-                        roles: [PROJECT_MANAGER_ROLE,TEAM_LEADER_ROLE]
-                    },
-                    {               
-                        id: "e2",
-                        firstName: "Glen",
-                        lastName: "Carter",
-                        jobPosition: "Backend Developer",
-                        phone: "(593) 337-8976",
-                        email: "glen.carter@example.com",
-                        roles: [TEAM_LEADER_ROLE]
-                    }
-                ]
-            }
-        },
-        {
-            id: 'p2 ',
             name: "Urban Link",
             projectManager: {
                 id: "e4",
@@ -114,9 +72,130 @@ export const useProjectsStore = defineStore('projects', () => {
                         phone: "(895) 726-5639",
                         email: "laurie.kelly@example.com",
                         roles: [PROJECT_MANAGER_ROLE]
+                    },
+                    {
+                        id: "e10",
+                        firstName: "Rhonda",
+                        lastName: "Kennedy",
+                        jobPosition: "Data Engineer",
+                        phone: "(402) 207-8156",
+                        email: "rhonda.kennedy@example.com",
+                        roles: [TEAM_LEADER_ROLE,PROJECT_MANAGER_ROLE]
                     }
                 ]
-            }
+            },
+            tasks: [
+                {
+                    id: 'p1t1',
+                    name: 'Infrastructure Mapping',
+                    description: ' Identify and document the existing IT infrastructure of urban areas, including networks, servers, and hardware configurations, to assess integration requirements.',
+                    employee: {
+                        id: "e5",
+                        firstName: "Nicole",
+                        lastName: "Hanson",
+                        jobPosition: "DevOps Engineer",
+                        phone: "(726) 667-1891",
+                        email: "nicole.hanson@example.com",
+                        roles: [PROJECT_MANAGER_ROLE]
+                    },
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t2',
+                    name: 'Database Integration',
+                    description: 'Integrate diverse data sources from urban services and utilities into a unified database system, ensuring seamless access and efficient data management.',
+                    employee: {
+                        id: "e10",
+                        firstName: "Rhonda",
+                        lastName: "Kennedy",
+                        jobPosition: "Data Engineer",
+                        phone: "(402) 207-8156",
+                        email: "rhonda.kennedy@example.com",
+                        roles: [TEAM_LEADER_ROLE,PROJECT_MANAGER_ROLE]
+                    },
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t3',
+                    name: 'User Interface Design',
+                    description: 'Develop intuitive and user-friendly interfaces for urban residents and administrators to access and interact with the Urban Link platform effectively.',
+                    employee: {
+                        id: "e4",
+                        firstName: "Laurie",
+                        lastName: "Kelly",
+                        jobPosition: "UI/UX Designer",
+                        phone: "(895) 726-5639",
+                        email: "laurie.kelly@example.com",
+                        roles: [PROJECT_MANAGER_ROLE]
+                    },
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t4',
+                    name: 'Backend Development',
+                    description: 'Build robust backend systems and APIs that handle data processing, analytics, and integration tasks to support the functionalities of Urban Link.',
+                    employee: {
+                        id: "e9",
+                        firstName: "Christina",
+                        lastName: "Beck",
+                        jobPosition: "Python Developer",
+                        phone: "(352) 869-1115",
+                        email: "christina.beck@example.com",
+                        roles: [TEAM_LEADER_ROLE]
+                    },
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t5',
+                    name: 'Network Security Audit',
+                    description: 'Conduct thorough security assessments and audits to identify vulnerabilities in the Urban Link network infrastructure and implement necessary safeguards.',
+                    employee: null,
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t6',
+                    name: 'API Integration',
+                    description: 'Migrate existing urban data and records to the Urban Link platform while ensuring data integrity, accuracy, and compliance with data protection regulations.',
+                    employee: null,
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t7',
+                    name: 'Data Migration',
+                    description: 'Migrate existing urban data and records to the Urban Link platform while ensuring data integrity, accuracy, and compliance with data protection regulations.',
+                    employee: null,
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t8',
+                    name: 'Performance Testing',
+                    description: 'Perform rigorous performance tests to evaluate the responsiveness, scalability, and reliability of Urban Link systems under various conditions and loads.',
+                    employee: null,
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t9',
+                    name: 'Mobile App Development',
+                    description: 'Develop mobile applications compatible with iOS and Android platforms to extend the accessibility of Urban Link services to residents on-the-go.',
+                    employee: null,
+                    status: TASK_BACKLOG,
+                },
+                {
+                    id: 'p1t10',
+                    name: 'Cloud Deployment Strategy',
+                    description: 'Plan and implement a scalable cloud infrastructure strategy for Urban Link to ensure high availability, reliability, and cost-effectiveness of the platform.',
+                    employee: {
+                        id: "e5",
+                        firstName: "Nicole",
+                        lastName: "Hanson",
+                        jobPosition: "DevOps Engineer",
+                        phone: "(726) 667-1891",
+                        email: "nicole.hanson@example.com",
+                        roles: [PROJECT_MANAGER_ROLE]
+                    },
+                    status: TASK_BACKLOG,
+                },
+            ]
         },
     ])
     
@@ -179,5 +258,67 @@ export const useProjectsStore = defineStore('projects', () => {
         })
     }
 
-    return { projects ,pending, addProject,editProject ,deleteProject }
+    function getProject(projectId) {
+        return projects.value.find(p => p.id === projectId)
+    }
+
+    function getTasks(projectId) {
+        const project = projects.value.find(p => p.id === projectId)
+        return project.tasks
+    }
+
+    function addTask(projectId, task) {
+        pending.value = true
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    const project = projects.value.find(p => p.id === projectId)
+                    project.tasks.push(task)
+                    resolve(`${task.name} has been added to the task list successfully.`)
+                } catch(error) {
+                    reject('During adding the task an error occurred.')
+                } finally {
+                    pending.value = false
+                }
+            },PENDING_TIME)
+        })
+    }
+
+    function editTask(projectId, taskId, editedTask) {
+        pending.value = true
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    const project = projects.value.find(p => p.id === projectId)
+                    const taskIndexToEdit = project.tasks.findIndex(t => t.id === taskId)
+                    project.tasks[taskIndexToEdit] = editedTask
+                    resolve(`Task has been edited successfully.`)
+                } catch(error) {
+                    reject('During editing the task an error occurred.')
+                } finally {
+                    pending.value = false
+                }
+            },PENDING_TIME)
+        })
+    }
+
+    function deleteTask(projectId, taskId) {
+        pending.value = true
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    const project = projects.value.find(p => p.id === projectId)
+                    const taskIndexToDelete = project.tasks.findIndex(t => t.id === taskId)
+                    project.tasks.splice(taskIndexToDelete,1)
+                    resolve(`Task has been deleted successfully.`)
+                } catch(error) {
+                    reject('During deleting the task an error occurred.')
+                } finally {
+                    pending.value = false
+                }
+            },PENDING_TIME)
+        })
+    }
+
+    return { projects,pending, addProject,editProject ,deleteProject, getProject, getTasks, addTask, editTask,deleteTask }
 })

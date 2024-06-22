@@ -50,6 +50,7 @@
         <Button @click="editEmployee" label="Edit" :loading="editing" />
     </template>
 </Dialog>
+<Toast />
 </template>
 
 <script setup>

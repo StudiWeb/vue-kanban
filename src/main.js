@@ -8,23 +8,28 @@ import '@/assets/styles.scss';
 import ToastService from 'primevue/toastservice';
 
 import { Form, Field, ErrorMessage  } from 'vee-validate';
-import Button from 'primevue/button';
-import Toolbar from 'primevue/toolbar';
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import Dialog from 'primevue/dialog';
-import InputText from 'primevue/inputtext';
-import InputMask from 'primevue/inputmask';
-import Card from 'primevue/card';
-import Toast from 'primevue/toast';
-import Dropdown from 'primevue/dropdown';
-import PickList from 'primevue/picklist';
-import Checkbox from 'primevue/checkbox';
-import TabView from 'primevue/tabview';
-import TabPanel from 'primevue/tabpanel';
+import Button from 'primevue/button'
+import Toolbar from 'primevue/toolbar'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+import Dialog from 'primevue/dialog'
+import InputText from 'primevue/inputtext'
+import InputMask from 'primevue/inputmask'
+import Card from 'primevue/card'
+import Toast from 'primevue/toast'
+import Dropdown from 'primevue/dropdown'
+import PickList from 'primevue/picklist'
+import Checkbox from 'primevue/checkbox'
+import TabView from 'primevue/tabview'
+import TabPanel from 'primevue/tabpanel'
+import Menubar from 'primevue/menubar'
+import Accordion from 'primevue/accordion'
+import AccordionTab from 'primevue/accordiontab'
+import ScrollPanel from 'primevue/scrollpanel'
+import Badge from 'primevue/badge'
+import Textarea from 'primevue/textarea'
 
-
-const app = createApp(App);
+const app = createApp(App)
 const pinia = createPinia()
 
 app.use(router);
@@ -49,5 +54,11 @@ app.component('PickList',PickList)
 app.component('Checkbox',Checkbox)
 app.component('TabView',TabView)
 app.component('TabPanel',TabPanel)
+app.component('Menubar',Menubar)
+app.component('Accordion',Accordion)
+app.component('AccordionTab',AccordionTab)
+app.component('ScrollPanel',ScrollPanel)
+app.component('Badge',Badge)
+app.component('Textarea',Textarea)
 
 app.mount('#app');

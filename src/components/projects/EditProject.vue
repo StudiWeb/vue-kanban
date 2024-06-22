@@ -49,6 +49,7 @@
             <Button label="Edit" @click="editProject" :loading="editing" />
         </template>
     </Dialog>
+    <Toast />
 </template>
 
 <script setup>

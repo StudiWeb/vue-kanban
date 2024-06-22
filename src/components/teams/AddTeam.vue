@@ -47,6 +47,7 @@
             <Button @click="addTeam" label="Add" :loading="adding" />
         </template>
     </Dialog>
+    <Toast />
 </template>
 
 <script setup>

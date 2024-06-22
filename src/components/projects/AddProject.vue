@@ -50,6 +50,7 @@
             <Button label="Add" @click="addProject" :loading="adding" />
         </template>
     </Dialog>
+    <Toast />
 </template>
 
 <script setup>
